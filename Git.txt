@@ -1,0 +1,59 @@
+默认分支 master 
+
+初始化Git  git init
+追踪文件	git add <文件/路径> --将工作区文件添加至暂存区
+提交命令	git commit --将暂存区文件添加至本地仓库
+	git commit -m “ ”--“ ”提交信息
+	git commit -a --跳过git add步骤，自动把所有已经跟踪的文件暂存起来一并提交
+	git commit --amned --撤销提交
+                git checkout -- .  忽略未commit任务
+
+移除文件	git rm
+	git rm -f --删除已在暂存区的文件
+	git rm --cached <文件> --从git库中删除，仍保留在磁盘
+	git rm log/\*.log --删除以.log为后缀的文件
+	git rm \*~ --删除以~结尾的文件
+
+文件名修改  git mv 原名 新名
+克隆仓库	git clone <url>
+查看文件状态  git status
+
+查看尚未暂存文件的更新  git diff
+查看已暂存的准备提交的内容  git diff --staged(cached)
+
+查看远程仓库  git remote -->git remote show <remote>
+	      git remote -v --查看全部仓库
+	      git ls-remote <remote> --查看完成仓库列表信息
+添加远程仓库  git remote add <shortname><url>
+远程仓库改名  git remote rename 原名 新名
+删除远程仓库  git remote remove 
+
+创建分支  	git branch (创建分支但不会跳转到该分支) 
+	git checkout -b iss53  (创建分支并跳转至分支)---> git branch iss53+git checkout iss53
+
+查看分支   git log（或提交历史）
+	git log -p -n --查看最近n次的提交记录
+	git log --stat --查看每次提交的简略信息
+	git log --pretty=oneline/short/full/fuller --通过不同的方式显示提交历史
+	git log --pertty=format --定制记录显示格式 
+	git log --oneline --decorate --查看各个分支所指的对象 
+	git log --oneline --decorate --graph --all --输出提交历史、各个分支的指向以及项目的分支分叉情况
+分支切换	git checkout
+分支合并	git merge (先跳转至待合并的分支，然后执行该指令将待合并分支进行合并)
+删除分支	git branch -d
+分支列表   git branch --不加参数 
+	git branch -v --检查分支最后一次提交
+	git branch --merged --查看已经合并的分支
+	git branch --no-merged --查看未进行合并的分支
+分支回退  git resert <分支哈希值>
+分支推送  git push <远程仓库><分支名>：<远程仓库分支名>
+删除远程分支  git push <远程仓库> --delete <远程分支>
+	
+同步远程库  git fetch <remote> --抓取本地没有的数据，并且更新本地数据库，移动 origin/master 指针指向新的、更新后的位置
+	     --->git pull = git fetch + git mergr
+
+跟踪分支  git checkout --track  ---> git checkout -b <branch><remote>/<branch>
+查看跟踪分支  git branch -vv
+统计最新的领先与落后数字 git fetch --all; git branch -vv
+变基操作  git rebase --将提交到某一分支上的所有修改都移至另一分支上
+               git rebase --onto master server client --取出 client 分支，找出它从 server 分支分歧之后的补丁， 然后把这些补丁在 master 分支上重放一遍，让 client 看起来像直接基于 master 修改一样
